@@ -215,56 +215,12 @@ function Ensure-PackerVersion
 }
 
 # Function to convert string to boolean
-function Convert-ToBoolean($value)
-{
-    $valueLower = $value.ToLower()
-    if ($valueLower -eq "true")
-    {
-        return $true
-    }
-    elseif ($valueLower -eq "false")
-    {
-        return $false
-    }
-    else
-    {
-        Write-Error "[$( $MyInvocation.MyCommand.Name )] Error: Invalid value - $value. Exiting."
-        exit 1
-    }
-}
 
-function Connect-AzAccountWithServicePrincipal
-{
-    param (
-        [string]$ApplicationId,
-        [string]$TenantId,
-        [string]$Secret,
-        [string]$SubscriptionId
-    )
-
-    try
-    {
-        $SecureSecret = $Secret | ConvertTo-SecureString -AsPlainText -Force
-        $Credential = New-Object System.Management.Automation.PSCredential ($ApplicationId, $SecureSecret)
-        Connect-AzAccount -ServicePrincipal -Credential $Credential -Tenant $TenantId -ErrorAction Stop | Out-Null
-
-        if (-not [string]::IsNullOrEmpty($SubscriptionId))
-        {
-            Set-AzContext -SubscriptionId $SubscriptionId | Out-Null
-        }
-
-        Write-Host "[$( $MyInvocation.MyCommand.Name )] Success: Successfully logged in to Azure." -ForegroundColor Cyan
-    }
-    catch
-    {
-        Write-Error "[$( $MyInvocation.MyCommand.Name )] Error: Failed to log in to Azure with the provided service principal details: $_"
-        throw $_
-    }
-}
 
 function Manage-CurrentIPInNsg
 {
     param (
+        [CmdletBinding()]
         [Microsoft.Azure.Commands.Network.Models.PSNetworkSecurityGroup]$Nsg,
         [bool]$AddRule,
         [string]$RuleName,
