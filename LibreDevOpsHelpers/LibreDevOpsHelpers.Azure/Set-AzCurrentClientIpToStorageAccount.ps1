@@ -42,26 +42,34 @@ function Set-AzCurrentClientIpToStorageAccount
         {
             $currentNetworkAcls = $storageAccount.NetworkRuleSet
             $currentIp = (Invoke-RestMethod -Uri $ClientIpAddressCheckerUrl).Trim()
-            Write-Verbose "[$( $MyInvocation.MyCommand.Name )] Info: Current client IP is $currentIp"
+            # Append /32 if the current IP doesn't already have a CIDR notation
+            $currentIpWithCidr = if ($currentIp -match '/\d+$')
+            {
+                $currentIp
+            }
+            else
+            {
+                "${currentIp}"
+            }
+            Write-Verbose "[$( $MyInvocation.MyCommand.Name )] Info: Current client IP with CIDR is $currentIpWithCidr"
 
             $currentIps = $currentNetworkAcls.IpRules | ForEach-Object { $_.IPAddressOrRange }
             Write-Verbose "[$( $MyInvocation.MyCommand.Name )] Info: Rules that already exist on the storage account are $currentIps"
 
-            $ipAlreadyExists = $currentIps -contains $currentIp
+            $ipAlreadyExists = $currentIps -contains $currentIpWithCidr
             $newIpRules = $currentNetworkAcls.IpRules
 
             if ($AddClientIP -and -not $ipAlreadyExists)
             {
                 $ipRule = New-Object Microsoft.Azure.Commands.Management.Storage.Models.PSIpRule
-                $ipRule.IPAddressOrRange = $currentIp
+                $ipRule.IPAddressOrRange = $currentIpWithCidr
                 $newIpRules += $ipRule
             }
             elseif (-not $AddClientIP)
             {
-                $newIpRules = $newIpRules | Where-Object { $_.IPAddressOrRange -ne $currentIp }
+                $newIpRules = $newIpRules | Where-Object { $_.IPAddressOrRange -ne $currentIp -and $_.IPAddressOrRange -ne $currentIpWithCidr }
             }
 
-            # Update the network rule set
             Update-AzStorageAccountNetworkRuleSet -ResourceGroupName $resourceGroupName -AccountName $storageAccountName -IpRule $newIpRules
             Write-Verbose "[$( $MyInvocation.MyCommand.Name )] Info: Storage Account network rules updated successfully."
         }
