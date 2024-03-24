@@ -26,11 +26,11 @@ function Connect-AzAccountWithAccessToken
         $subscriptionUrl = "https://management.azure.com/subscriptions/${SubscriptionId}?api-version=$ApiVersion"
 
         # Logging URL for debugging purposes
-        Write-Verbose "Calling URL: $subscriptionUrl"
+        Write-Verbose "[$( $MyInvocation.MyCommand.Name )] Info: Calling URL: $subscriptionUrl"
 
         $response = Invoke-RestMethod -Uri $subscriptionUrl -Method Get -Headers $authHeader
 
-        Write-Verbose "Successfully called Azure REST API with the provided access token."
+        Write-Verbose "[$( $MyInvocation.MyCommand.Name )] Info: Successfully called Azure REST API with the provided access token."
         Write-Information "[$( $MyInvocation.MyCommand.Name )] Info: Retrieved subscription details: $( $response.id )"
     }
     catch

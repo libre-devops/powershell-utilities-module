@@ -26,13 +26,13 @@ function Connect-AzCliAccountWithServicePrincipal
 
         # Execute the command
         Invoke-Expression $loginCommand
-        Write-Verbose "Successfully logged in to Azure with the provided service principal."
+        Write-Verbose "[$( $MyInvocation.MyCommand.Name )] Info: Successfully logged in to Azure with the provided service principal."
 
         if (-not [string]::IsNullOrEmpty($SubscriptionId))
         {
             $setSubscriptionCommand = "az account set --subscription `"$SubscriptionId`""
             Invoke-Expression $setSubscriptionCommand
-            Write-Verbose "Subscription context set to $SubscriptionId."
+            Write-Verbose "[$( $MyInvocation.MyCommand.Name )] Info: Subscription context set to $SubscriptionId."
         }
 
         Write-Information "[$( $MyInvocation.MyCommand.Name )] Success: Successfully logged in to Azure CLI with service principal."

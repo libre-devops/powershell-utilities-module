@@ -51,7 +51,7 @@ function Connect-AzAccountWithManagedIdentity
         # Set the subscription context if provided
         if (-not [string]::IsNullOrEmpty($SubscriptionId))
         {
-            Write-Verbose "SubscriptionId provided. Attempting to set context to $SubscriptionId."
+            Write-Verbose "[$( $MyInvocation.MyCommand.Name )] Info: SubscriptionId provided. Attempting to set context to $SubscriptionId."
             Set-AzContext -SubscriptionId $SubscriptionId | Out-Null
             Write-Information "[$( $MyInvocation.MyCommand.Name )] Info: Context set to $SubscriptionId successfully."
         }

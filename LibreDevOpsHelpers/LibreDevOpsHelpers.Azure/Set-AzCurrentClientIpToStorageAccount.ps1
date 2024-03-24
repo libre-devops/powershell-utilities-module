@@ -18,7 +18,7 @@ function Set-AzCurrentClientIpToStorageAccount
             $context = Get-AzContext
             if (-not $context)
             {
-                throw "User is not logged into Azure. Please login using Connect-AzAccount."
+                throw "[$( $MyInvocation.MyCommand.Name )] Error: User is not logged into Azure. Please login using Connect-AzAccount."
             }
             Write-Verbose "[$( $MyInvocation.MyCommand.Name )] Info: AzContext is set...continuing"
 

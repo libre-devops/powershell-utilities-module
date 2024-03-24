@@ -12,7 +12,7 @@
     RootModule = 'LibreDevOpsHelpers.psm1'
 
     # Version number of this module.
-    ModuleVersion = '0.0.4'
+    ModuleVersion = '0.0.7'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -71,14 +71,11 @@
     '.\LibreDevOpsHelpers.Docker\LibreDevOpsHelpers.Docker.psm1',
     '.\LibreDevOpsHelpers.Packer\LibreDevOpsHelpers.Packer.psm1',
     '.\LibreDevOpsHelpers.Terraform\LibreDevOpsHelpers.Terraform.psm1',
-    '.\LibreDevOpsHelpers.PowerShell\LibreDevOpsHelpers.PowerShell.psm1')
+    '.\LibreDevOpsHelpers.PowerShell\LibreDevOpsHelpers.PowerShell.psm1',
+    '.\LibreDevOpsHelpers.OpenTofu\LibreDevOpsHelpers.OpenTofu.psm1')
 
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-    FunctionsToExport = 'Connect-AzAccountWithAccessToken',
-    'Connect-AzAccountWithManagedIdentity',
-    'Connect-AzAccountWithServicePrincipal',
-    'Connect-AzCliAccountWithManagedIdentity',
-    'Connect-AzCliAccountWithServicePrincipal', 'ConvertTo-Boolean', 'New-Password'
+    FunctionsToExport = '*'
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
     CmdletsToExport = '*'

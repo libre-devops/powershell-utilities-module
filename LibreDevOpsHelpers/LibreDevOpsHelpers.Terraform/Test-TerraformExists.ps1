@@ -5,7 +5,7 @@ function Test-TerraformExists
 
     $terraformCommand = Get-Command terraform -ErrorAction Stop
 
-    if ($terraformCommand -ne $null)
+    if ($null -ne $terraformCommand)
     {
         Write-Verbose "[$( $MyInvocation.MyCommand.Name )] Success: Terraform found at: $( $terraformCommand.Source )"
     }

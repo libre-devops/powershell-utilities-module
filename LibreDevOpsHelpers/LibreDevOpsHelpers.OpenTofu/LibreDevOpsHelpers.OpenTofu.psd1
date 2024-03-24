@@ -8,7 +8,7 @@
 
 @{
 # Script module or binary module file associated with this manifest.
-    RootModule = 'LibreDevOpsHelpers.Terraform.psm1'
+    RootModule = 'LibreDevOpsHelpers.OpenTofu.psm1'
 
     # Version number of this module.
     ModuleVersion = '0.0.7'
@@ -17,7 +17,7 @@
     #CompatiblePSEditions = @('Core', 'Desktop')
 
     # ID used to uniquely identify this module
-    GUID = '7f7d115c-dd1b-4d54-a27a-9c2cfe1d1058'
+    GUID = '94ec85ce-dcd1-4df4-8180-153bee6116e4'
 
     # Author of this module
     Author = 'Craig Thacker'
@@ -29,7 +29,7 @@
     Copyright = '(c) Craig Thacker. All rights reserved.'
 
     # Description of the functionality provided by this module
-    Description = 'Terraform helper functions for LibreDevOps'
+    Description = 'OpenTofu helper functions for LibreDevOps'
 
     # Minimum version of the PowerShell engine required by this module
     #PowerShellVersion = '5.1'

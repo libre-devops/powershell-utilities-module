@@ -5,7 +5,7 @@ function Test-DockerExists
 
     $dockerCommand = Get-Command docker -ErrorAction Stop
 
-    if ($dockerCommand -ne $null)
+    if ($null -ne $dockerCommand)
     {
         Write-Verbose "[$( $MyInvocation.MyCommand.Name )] Success: Docker found at: $( $dockerCommand.Source )"
     }

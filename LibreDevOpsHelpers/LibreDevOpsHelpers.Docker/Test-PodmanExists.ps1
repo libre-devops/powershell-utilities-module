@@ -5,7 +5,7 @@ function Test-PodmanExists
 
     $podmanCommand = Get-Command podman -ErrorAction Stop
 
-    if ($podmanCommand -ne $null)
+    if ($null -ne $podmanCommand)
     {
         Write-Verbose "[$( $MyInvocation.MyCommand.Name )] Success: Podman found at: $( $podmanCommand.Source )"
     }

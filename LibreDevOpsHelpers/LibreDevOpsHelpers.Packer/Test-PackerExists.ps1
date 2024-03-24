@@ -5,7 +5,7 @@ function Test-PackerExists
 
     $packerCommand = Get-Command packer -ErrorAction Stop
 
-    if ($packerCommand -ne $null)
+    if ($null -ne $packerCommand)
     {
         Write-Verbose "[$( $MyInvocation.MyCommand.Name )] Success: Packer found at: $( $packerCommand.Source )"
     }

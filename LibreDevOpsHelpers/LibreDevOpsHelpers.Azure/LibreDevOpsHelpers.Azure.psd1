@@ -11,7 +11,7 @@
     RootModule = 'LibreDevOpsHelpers.Azure.psm1'
 
     # Version number of this module.
-    ModuleVersion = '0.0.4'
+    ModuleVersion = '0.0.7'
 
     # Supported PSEditions
     #CompatiblePSEditions = @('Core', 'Desktop')
@@ -38,7 +38,8 @@
     RequiredModules = @(
         @{ ModuleName = 'Az.Accounts' },
         @{ ModuleName = 'Az.Network' },
-        @{ ModuleName = 'Az.KeyVault' }
+        @{ ModuleName = 'Az.KeyVault' },
+        @{ ModuleName = 'Az.Storage' }
     )
 
 

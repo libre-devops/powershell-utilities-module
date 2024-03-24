@@ -22,7 +22,7 @@ function New-Password
     )
 
     # Helper function to generate a random sequence from the alphabet
-    function Generate-RandomSequence
+    function New-RandomSequence
     {
         param (
             [int] $length,
@@ -42,16 +42,16 @@ function New-Password
     $minLength = 4
     if ($partLength -lt $minLength)
     {
-        $errorMessage = "Each part of the password must be at least $minLength characters to ensure complexity."
+        $errorMessage = "[$( $MyInvocation.MyCommand.Name )] Error: Each part of the password must be at least $minLength characters to ensure complexity."
         Write-Error $errorMessage
         throw $errorMessage
     }
 
-    Write-Verbose "Generating password parts with length of $partLength characters each."
+    Write-Verbose "[$( $MyInvocation.MyCommand.Name )] Info: Generating password parts with length of $partLength characters each."
 
-    $part1 = Generate-RandomSequence -length $partLength -alphabet $alphabet
-    $part2 = Generate-RandomSequence -length $partLength -alphabet $alphabet
-    $part3 = Generate-RandomSequence -length $partLength -alphabet $alphabet
+    $part1 = New-RandomSequence -length $partLength -alphabet $alphabet
+    $part2 = New-RandomSequence -length $partLength -alphabet $alphabet
+    $part3 = New-RandomSequence -length $partLength -alphabet $alphabet
 
     # Ensuring at least one character from each category in each part
     $part1 = $upper[(Get-Random -Maximum $upper.Length)] + $part1.Substring(1)
@@ -61,6 +61,6 @@ function New-Password
     # Concatenate parts with separators
     $password = "$part1-$part2-$part3"
 
-    Write-Information "Password generated successfully."
+    Write-Verbose "[$( $MyInvocation.MyCommand.Name )] Info: Password generated successfully."
     return $password
 }

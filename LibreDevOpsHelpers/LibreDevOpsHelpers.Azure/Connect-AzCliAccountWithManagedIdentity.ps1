@@ -20,13 +20,13 @@ function Connect-AzCliAccountWithManagedIdentity
         {
             $setSubscriptionCommand = "az account set --subscription `"$SubscriptionId`""
             Invoke-Expression $setSubscriptionCommand
-            Write-Verbose "Subscription context set to $SubscriptionId."
+            Write-Verbose "[$( $MyInvocation.MyCommand.Name )] Info: Subscription context set to $SubscriptionId."
         }
 
         # If ClientId is provided, this indicates the use of a user-assigned managed identity
         if (-not [string]::IsNullOrEmpty($ClientId))
         {
-            Write-Verbose "Note: ClientId was provided for a user-assigned managed identity. Ensure this script is run on a resource with access to that identity."
+            Write-Verbose "[$( $MyInvocation.MyCommand.Name )] Info: Note: ClientId was provided for a user-assigned managed identity. Ensure this script is run on a resource with access to that identity."
         }
 
         Write-Information "[$( $MyInvocation.MyCommand.Name )] Info: Using Azure Managed Identity. Ensure this script is executed in a context where a Managed Identity is available."

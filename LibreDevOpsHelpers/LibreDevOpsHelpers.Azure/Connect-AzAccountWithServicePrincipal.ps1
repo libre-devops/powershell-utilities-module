@@ -22,13 +22,13 @@ function Connect-AzAccountWithServicePrincipal
         $SecureSecret = $Secret | ConvertTo-SecureString -AsPlainText -Force
         $Credential = New-Object System.Management.Automation.PSCredential ($ApplicationId, $SecureSecret)
 
-        Write-Verbose "Attempting to connect to Azure with the provided service principal."
+        Write-Verbose "[$( $MyInvocation.MyCommand.Name )] Info: Attempting to connect to Azure with the provided service principal."
         Connect-AzAccount -ServicePrincipal -Credential $Credential -Tenant $TenantId -ErrorAction Stop | Out-Null
         Write-Information "[$( $MyInvocation.MyCommand.Name )] Info: Connected to account successfully."
 
         if (-not [string]::IsNullOrEmpty($SubscriptionId))
         {
-            Write-Verbose "SubscriptionId provided. Attempting to set context to $SubscriptionId."
+            Write-Verbose "[$( $MyInvocation.MyCommand.Name )] Info: SubscriptionId provided. Attempting to set context to $SubscriptionId."
             Set-AzContext -SubscriptionId $SubscriptionId | Out-Null
             Write-Information "[$( $MyInvocation.MyCommand.Name )] Info: Context set to $SubscriptionId successfully."
         }
